@@ -1,0 +1,32 @@
+extends layout
+
+block content
+	h2 Update Book
+	
+	if errors
+		.error-container
+			h3 Validation Errors
+			ul
+				each error in errors
+					li= error
+	.book-form
+		form(action=`/books/${book.id}`, method="post")
+			.form-group
+				label(for="title") Title
+				input#title(name="title", type="text", value=book.title)
+			.form-group
+				label(for="author") Author
+				input#author(name="author", type="text", value=book.author)
+			.form-group
+				label(for="genre") Genre
+				input#genre(name="genre", type="text", value=book.genre)
+			.form-group
+				label(for="year") Year
+				input#year(name="year", type="number", value=book.year)
+			.button-group
+				input(type="submit", value="Update Book")
+				a.button.secondary(href="/books") Cancel
+		- var confirmMessage = `Do you really want to delete this book "${book.title}" by ${book.author}?`
+		form(action=`/books/${book.id}/delete`, method="post", onsubmit=`return confirm(${JSON.stringify(confirmMessage)});`)
+			.button-group
+				input.danger(type="submit", value="Delete Book", action=`/books/${book.id}/delete`, method="post", onsubmit="return confirm('Do you really want to delete this book?');")

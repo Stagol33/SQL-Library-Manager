@@ -1,0 +1,21 @@
+doctype html
+html
+	head
+		title= title || "Library Manager"
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		meta(name="viewport" content="width=device-width, initial-scale=1.0")
+	body
+		header
+			.container
+				h1 Library Manager
+		main.container
+			block content
+		footer
+			.container
+				p © 
+					span#currentYear
+					|  Library Manager - Created with ♥
+		
+		script.
+			// Set the current year in the footer
+			document.getElementById('currentYear').textContent = new Date().getFullYear();

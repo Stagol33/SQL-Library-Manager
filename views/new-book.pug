@@ -1,0 +1,28 @@
+extends layout
+
+block content
+	h2 New Book
+	
+	if errors
+		.error-container
+			h3 Validation Errors
+			ul
+				each error in errors
+					li= error
+	
+	form.book-form(action="/books/new", method="post")
+		.form-group
+			label(for="title") Title
+			input#title(name="title", type="text", value=book.title)
+		.form-group
+			label(for="author") Author
+			input#author(name="author", type="text", value=book.author)
+		.form-group
+			label(for="genre") Genre
+			input#genre(name="genre", type="text", value=book.genre)
+		.form-group
+			label(for="year") Year
+			input#year(name="year", type="number", value=book.year)
+		.button-group
+			input(type="submit", value="Create New Book")
+			a.button.secondary(href="/books") Cancel

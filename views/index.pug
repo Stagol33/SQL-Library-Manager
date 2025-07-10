@@ -1,0 +1,55 @@
+extends layout
+
+block content
+	h2 Books
+	
+	.action-bar
+		a.button(href="/books/new") Create New Book
+		form.search-form(action="/books", method="get")
+			input#term(name="term", type="text", placeholder="Search by title, author, genre, or year...", value=term)
+			input(type="submit", value="Search")
+	
+	table
+		thead
+			tr
+				th Title
+				th Author
+				th Genre
+				th Year
+		tbody
+			if books && books.length
+				each book in books
+					tr(data-id=book.id)
+						td= book.title
+						td= book.author
+						td= book.genre || 'N/A'
+						td= book.year || 'N/A'
+			else
+				tr
+					td(colspan="4") No books found. Add a new book or modify your search.
+	if locals.totalPages && totalPages > 1
+		.pagination
+			if page > 1
+				a(href=`/books?page=${page-1}${term ? `&term=${term}` : ''}`) ← Previous
+			else
+				span ← Previous
+			
+			span Page #{page} of #{totalPages}
+			
+			if page < totalPages
+				a(href=`/books?page=${page+1}${term ? `&term=${term}` : ''}`) Next →
+			else
+				span Next →
+	script.
+		// Make table rows clickable
+		document.addEventListener('DOMContentLoaded', function() {
+			const rows = document.querySelectorAll('tbody tr[data-id]');
+			
+			rows.forEach(row => {
+				row.addEventListener('click', function() {
+					const bookId = this.getAttribute('data-id');
+					window.location.href = '/books/' + bookId;
+				});
+			});
+		});
+

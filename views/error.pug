@@ -1,0 +1,7 @@
+extends layout
+
+block content
+	.error-page
+		h1= err.message || 'Server Error'
+		p Something went wrong with the application. Please try again later.
+		a.button(href="/books") Back to Home
