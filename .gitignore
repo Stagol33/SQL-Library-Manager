@@ -105,10 +105,11 @@ dist
 # Local history for Visual Studio Code
 .history/
 
-# macOS
+# macOS system files
 .DS_Store
 .AppleDouble
 .LSOverride
+._*
 
 # Windows
 Thumbs.db
