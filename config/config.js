@@ -8,6 +8,10 @@ module.exports = {
     storage: "./library.db"
   },
   production: {
+    dialect: "sqlite",
+    storage: "/tmp/library.db"
+    // Comment out PostgreSQL config temporarily
+    /*
     dialect: "postgres",
     url: process.env.DATABASE_URL,
     dialectOptions: {
@@ -16,5 +20,6 @@ module.exports = {
         rejectUnauthorized: false
       }
     }
+    */
   }
 };
